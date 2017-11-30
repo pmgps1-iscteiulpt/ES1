@@ -164,7 +164,12 @@ public class Gui {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				writeRules();
+//				try {
+					writeRules();
+//				} catch (NullPointerException exception) {
+//					System.out.println("");
+//				}
+
 			}
 		});
 		/***********************************************/
@@ -190,8 +195,8 @@ public class Gui {
 	}
 
 	/*
-	 * ap�s pressionar o bot�o de upload com path na text box as regras e respetivos
-	 * pesos s�o apresentados numa tabela
+	 * ap�s pressionar o bot�o de upload com path na text box as regras e
+	 * respetivos pesos s�o apresentados numa tabela
 	 */
 	private void uploadRules(String rulesPath) {
 		this.rulesList = Rule.readRulesFile(rulesPath);
@@ -218,6 +223,7 @@ public class Gui {
 			public int getColumnCount() {
 				return 2;
 			}
+			
 
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -231,8 +237,9 @@ public class Gui {
 			model.setValueAt(name, i, 0);
 
 			if (rule.hasWeight()) {
-				int weight = rule.getWeight();
-				model.setValueAt(weight, i, 1);
+				double weight = rule.getWeight();
+				String strWeight = "" + weight;
+				model.setValueAt(strWeight, i, 1);
 			}
 
 		}
@@ -248,20 +255,23 @@ public class Gui {
 			rule.setName(name);
 			if (model.getValueAt(i, 1) != null) {
 				String strWeight = (String) (model.getValueAt(i, 1));
-				int weight = Integer.parseInt(strWeight.trim());
-				rule.setWeight(weight);
+				double weight = Double.parseDouble(strWeight.trim());
+//				System.out.println(weight);
+				rule.setWeight(Rule.adjustWeight(weight));
+			} else {
+				rule.setWeight(0.0);
 			}
 
 		}
 	}
-
-	/*Escreve as regras e respetivos pesos*/
+	
+	
+	/* Escreve as regras e respetivos pesos */
 	private void writeRules() {
 		updateList();
 		try {
 			Writer writer = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream(
-							"./files/rules_v1.cf")));
+					new FileOutputStream("./files/rules_v1.cf")));
 			String rules = Rule.rulesListToString(rulesList);
 			writer.write(rules);
 			writer.close();

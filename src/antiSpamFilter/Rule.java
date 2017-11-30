@@ -22,13 +22,13 @@ public class Rule {
 	}
 
 	/* Peso */
-	private Integer weight;
+	private Double weight;
 
-	public Integer getWeight() {
+	public Double getWeight() {
 		return weight;
 	}
 
-	public void setWeight(Integer weight) {
+	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
 
@@ -53,7 +53,7 @@ public class Rule {
 	}
 
 	/* Construtor para quando o ficheiro j� cont�m pesos */
-	public Rule(String name, int weight) {
+	public Rule(String name, double weight) {
 		this.name = name;
 		this.weight = weight;
 		this.hasWeight = true;
@@ -82,13 +82,12 @@ public class Rule {
 
 	/* L� a String de uma linha do ficheiro rules e devolve um objeto Rule */
 	private static Rule readRule(String s) {
-		if (s.contains("�")) {
+		if (s.contains("=")) {
 			String[] vector = s.split("=");
-			System.out.println(vector[1]);
 			// for(String str : vector)
 			// str.trim();
 
-			return new Rule(vector[0].trim(), Integer.parseInt(vector[1].trim()));
+			return new Rule(vector[0].trim(), Double.parseDouble(vector[1].trim()));
 		} else {
 			return new Rule(s.trim()); 
 		}
@@ -103,6 +102,14 @@ public class Rule {
 				str += rule.toString() + "\n";
 		}
 		return str;
+	}
+	
+	public static double adjustWeight(double weight) {
+		if(weight < -5)
+			return -5;
+		if(weight > 5)
+			return 5;
+		return weight;		
 	}
 
 	@Override
