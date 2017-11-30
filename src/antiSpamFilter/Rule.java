@@ -32,7 +32,7 @@ public class Rule {
 		this.weight = weight;
 	}
 
-	/* Variável que indica se a regra tem, ou não, peso */
+	/* Variï¿½vel que indica se a regra tem, ou nï¿½o, peso */
 	private boolean hasWeight;
 
 	public boolean hasWeight() {
@@ -44,7 +44,7 @@ public class Rule {
 	}
 
 	/*
-	 * Construtor que só estabelece o nome para o ficheiro inicial que ainda não tem
+	 * Construtor que sï¿½ estabelece o nome para o ficheiro inicial que ainda nï¿½o tem
 	 * pesos
 	 */
 	public Rule(String name) {
@@ -52,7 +52,7 @@ public class Rule {
 		this.hasWeight = false;
 	}
 
-	/* Construtor para quando o ficheiro já contêm pesos */
+	/* Construtor para quando o ficheiro jï¿½ contï¿½m pesos */
 	public Rule(String name, int weight) {
 		this.name = name;
 		this.weight = weight;
@@ -60,7 +60,7 @@ public class Rule {
 	}
 
 	/*
-	 * Lê um ficheiro de regras e devolve uma lista com as regras e respetivos pesos
+	 * Lï¿½ um ficheiro de regras e devolve uma lista com as regras e respetivos pesos
 	 */
 	public static LinkedList<Rule> readRulesFile(String fileName) {
 		Scanner file;
@@ -80,17 +80,17 @@ public class Rule {
 		return rulesList;
 	}
 
-	/* Lê a String de uma linha do ficheiro rules e devolve um objeto Rule */
+	/* Lï¿½ a String de uma linha do ficheiro rules e devolve um objeto Rule */
 	private static Rule readRule(String s) {
-		if (s.contains("»")) {
-			String[] vector = s.split("»");
+		if (s.contains("ï¿½")) {
+			String[] vector = s.split("=");
 			System.out.println(vector[1]);
 			// for(String str : vector)
 			// str.trim();
 
 			return new Rule(vector[0].trim(), Integer.parseInt(vector[1].trim()));
 		} else {
-			return new Rule(s.trim());
+			return new Rule(s.trim()); 
 		}
 	}
 
@@ -110,7 +110,7 @@ public class Rule {
 		if (weight == null)
 			return name;
 		else
-			return name + "»" + weight;
+			return name + "=" + weight;
 	}
 
 }

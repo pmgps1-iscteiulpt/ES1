@@ -172,7 +172,7 @@ public class Gui {
 		/* Tabela para regras */
 		table = new JTable();
 
-		/* Ação para carregar no botão e apresentar regras na tabela */
+		/* Aï¿½ï¿½o para carregar no botï¿½o e apresentar regras na tabela */
 		rulesUploadButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -190,8 +190,8 @@ public class Gui {
 	}
 
 	/*
-	 * após pressionar o botão de upload com path na text box as regras e respetivos
-	 * pesos são apresentados numa tabela
+	 * apï¿½s pressionar o botï¿½o de upload com path na text box as regras e respetivos
+	 * pesos sï¿½o apresentados numa tabela
 	 */
 	private void uploadRules(String rulesPath) {
 		this.rulesList = Rule.readRulesFile(rulesPath);
@@ -261,7 +261,7 @@ public class Gui {
 		try {
 			Writer writer = new BufferedWriter(new OutputStreamWriter(
 					new FileOutputStream(
-							"C:\\Users\\afons\\git\\ES1-2017-IC1-64\\ES1-2017-IC1-64\\files\\rules_v1.cf")));
+							"./files/rules_v1.cf")));
 			String rules = Rule.rulesListToString(rulesList);
 			writer.write(rules);
 			writer.close();
