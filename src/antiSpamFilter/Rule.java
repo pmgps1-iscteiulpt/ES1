@@ -25,7 +25,7 @@ public class Rule {
 	private Double weight;
 
 	public Double getWeight() {
-		return weight;
+			return weight;
 	}
 
 	public void setWeight(Double weight) {
@@ -44,8 +44,8 @@ public class Rule {
 	}
 
 	/*
-	 * Construtor que s� estabelece o nome para o ficheiro inicial que ainda n�o tem
-	 * pesos
+	 * Construtor que s� estabelece o nome para o ficheiro inicial que ainda n�o
+	 * tem pesos
 	 */
 	public Rule(String name) {
 		this.name = name;
@@ -60,7 +60,8 @@ public class Rule {
 	}
 
 	/*
-	 * L� um ficheiro de regras e devolve uma lista com as regras e respetivos pesos
+	 * L� um ficheiro de regras e devolve uma lista com as regras e respetivos
+	 * pesos
 	 */
 	public static LinkedList<Rule> readRulesFile(String fileName) {
 		Scanner file;
@@ -89,7 +90,7 @@ public class Rule {
 
 			return new Rule(vector[0].trim(), Double.parseDouble(vector[1].trim()));
 		} else {
-			return new Rule(s.trim()); 
+			return new Rule(s.trim());
 		}
 	}
 
@@ -103,13 +104,13 @@ public class Rule {
 		}
 		return str;
 	}
-	
+
 	public static double adjustWeight(double weight) {
-		if(weight < -5)
+		if (weight < -5)
 			return -5;
-		if(weight > 5)
+		if (weight > 5)
 			return 5;
-		return weight;		
+		return weight;
 	}
 
 	@Override

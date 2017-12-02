@@ -26,6 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import antiSpamFilter.AntiSpamFilterManual;
 import antiSpamFilter.Rule;
 
 public class Gui {
@@ -120,7 +121,28 @@ public class Gui {
 
 		JCheckBox chckbxAutomatica = new JCheckBox("Autom\u00E1tica");
 		panelConfigChcbx.add(chckbxAutomatica);
-
+		
+/****************Para impedir que as 2 checkbx estejam selecionadas ao msm tempo********/
+		chckbxManual.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxAutomatica.isSelected()) {
+					chckbxAutomatica.setSelected(false);
+				}
+			}
+		});
+		;
+		
+		chckbxAutomatica.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxManual.isSelected()) {
+					chckbxManual.setSelected(false);
+				}
+			}
+		});
+		;
+		
 		/* Falsos Positivos */
 		JLabel labelFP = new JLabel("FP");
 		panelConfigChcbx.add(labelFP);
@@ -188,10 +210,22 @@ public class Gui {
 			}
 		});
 		;
+		
+		buttonAvalConfig.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AntiSpamFilterManual avalManual= 
+						new AntiSpamFilterManual(rulesList, spamTextField.getText(), hamTextField.getText());
+				fpTextField.setText(""+avalManual.getFP());
+				fnTextField.setText(""+avalManual.getFN());
+				
+			}
+		});
+		;
 
 		JScrollPane scrollbar = new JScrollPane(table);
 		frame.getContentPane().add(scrollbar, BorderLayout.CENTER);
-
+		
 	}
 
 	/*
