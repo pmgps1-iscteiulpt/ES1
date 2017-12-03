@@ -210,7 +210,7 @@ public class Gui {
 			}
 		});
 		;
-		
+		/*botao Avaliar a config manual e inserir pf e fn*/
 		buttonAvalConfig.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
