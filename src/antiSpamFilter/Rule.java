@@ -13,10 +13,12 @@ public class Rule {
 	/* Nome da Regra */
 	private String name;
 
+	/*obter nome da regra*/
 	public String getName() {
 		return name;
 	}
 
+	/*alterar nome da regra*/
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -24,10 +26,12 @@ public class Rule {
 	/* Peso */
 	private Double weight;
 
+	/*obter peso da regra*/
 	public Double getWeight() {
 			return weight;
 	}
 
+	/*alterar peso da regra*/
 	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
@@ -35,10 +39,12 @@ public class Rule {
 	/* Vari�vel que indica se a regra tem, ou n�o, peso */
 	private boolean hasWeight;
 
+	/*obter peso*/
 	public boolean hasWeight() {
 		return hasWeight;
 	}
 
+	/*alterar peso*/
 	public void setHasWeight(boolean hasWeight) {
 		this.hasWeight = hasWeight;
 	}
@@ -94,6 +100,8 @@ public class Rule {
 		}
 	}
 
+	/*metodo que converte uma lista de regras para uma string, para posteriormente
+	 * essa string ser escrita num ficheiro*/
 	public static String rulesListToString(List<Rule> list) {
 		String str = "";
 		for (Rule rule : list) {
@@ -105,6 +113,7 @@ public class Rule {
 		return str;
 	}
 
+	/*metodo que ajusta o peso se tiver fora dos limites*/
 	public static double adjustWeight(double weight) {
 		if (weight < -5)
 			return -5;
@@ -113,6 +122,7 @@ public class Rule {
 		return weight;
 	}
 
+	/*metodo to string da regra -> disposicao de cada regra no ficheiro*/
 	@Override
 	public String toString() {
 		if (weight == null)

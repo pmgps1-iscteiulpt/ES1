@@ -32,11 +32,11 @@ import antiSpamFilter.Rule;
 public class Gui {
 
 	private JFrame frame;
-	private JTextField rulesTextField;
-	private JTextField spamTextField;
-	private JTextField hamTextField;
-	private JTextField fpTextField;
-	private JTextField fnTextField;
+	private JTextField rulesTextField; /*Caixa de texto para o ficheiro roles*/
+	private JTextField spamTextField; /*Caixa de texto para o ficheiro spam*/
+	private JTextField hamTextField; /*caixa de texto para o ficheiro ham*/
+	private JTextField fpTextField; /*text field para os falsos positivos*/
+	private JTextField fnTextField; /*text field para os falsos negativos*/
 	private JTable table;
 
 	private boolean editable; /* Serve para gerir a editabilidade da tabela */
@@ -320,6 +320,7 @@ public class Gui {
 		System.out.println("DONE");
 	}
 
+	/*MAIN*/
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
