@@ -172,16 +172,20 @@ public class Gui {
 		buttonAvalConfig.setHorizontalAlignment(SwingConstants.LEFT);
 		buttonAvalConfig.setVerticalAlignment(SwingConstants.BOTTOM);
 		panelSouth.add(buttonAvalConfig);
+		buttonAvalConfig.setEnabled(false);
 
 		JButton buttonGerarConfig = new JButton("Gerar Configura\u00E7\u00E3o Autom\u00E1tica");
 		buttonGerarConfig.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelSouth.add(buttonGerarConfig);
+		buttonGerarConfig.setEnabled(false);
 
 		JButton buttonObterGrafico = new JButton("Obter Gr\u00E1fico");
 		panelSouth.add(buttonObterGrafico);
+		buttonObterGrafico.setEnabled(false);
 
 		JButton buttonGravar = new JButton("Gravar");
 		panelSouth.add(buttonGravar);
+		buttonGravar.setEnabled(false);
 		buttonGravar.addActionListener(new ActionListener() {
 
 			@Override
@@ -194,6 +198,37 @@ public class Gui {
 
 			}
 		});
+		
+		/****************Para impedir que as 2 checkbx estejam selecionadas ao msm tempo********/
+		chckbxManual.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxAutomatica.isSelected()) {
+					
+					chckbxAutomatica.setSelected(false);
+					buttonGerarConfig.setEnabled(false);
+					buttonObterGrafico.setEnabled(false);
+				}
+				buttonAvalConfig.setEnabled(true);
+				buttonGravar.setEnabled(true);
+			}
+		});
+		;
+		
+		chckbxAutomatica.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxManual.isSelected()) {
+					
+					chckbxManual.setSelected(false);
+					buttonAvalConfig.setEnabled(false);
+					buttonGravar.setEnabled(false);
+				}
+				buttonGerarConfig.setEnabled(true);
+				buttonObterGrafico.setEnabled(true);
+			}
+		});
+		;
 		/***********************************************/
 
 		/* Tabela para regras */
