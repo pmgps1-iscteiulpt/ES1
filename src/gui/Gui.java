@@ -204,7 +204,6 @@ public class Gui {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (chckbxAutomatica.isSelected()) {
-					
 					chckbxAutomatica.setSelected(false);
 					buttonGerarConfig.setEnabled(false);
 					buttonObterGrafico.setEnabled(false);
@@ -219,7 +218,6 @@ public class Gui {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (chckbxManual.isSelected()) {
-					
 					chckbxManual.setSelected(false);
 					buttonAvalConfig.setEnabled(false);
 					buttonGravar.setEnabled(false);
