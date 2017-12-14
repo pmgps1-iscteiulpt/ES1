@@ -32,11 +32,11 @@ import antiSpamFilter.Rule;
 public class Gui {
 
 	private JFrame frame;
-	private JTextField rulesTextField; /*Caixa de texto para o ficheiro roles*/
-	private JTextField spamTextField; /*Caixa de texto para o ficheiro spam*/
-	private JTextField hamTextField; /*caixa de texto para o ficheiro ham*/
-	private JTextField fpTextField; /*text field para os falsos positivos*/
-	private JTextField fnTextField; /*text field para os falsos negativos*/
+	private JTextField rulesTextField; /* Caixa de texto para o ficheiro roles */
+	private JTextField spamTextField; /* Caixa de texto para o ficheiro spam */
+	private JTextField hamTextField; /* caixa de texto para o ficheiro ham */
+	private JTextField fpTextField; /* text field para os falsos positivos */
+	private JTextField fnTextField; /* text field para os falsos negativos */
 	private JTable table;
 
 	private boolean editable; /* Serve para gerir a editabilidade da tabela */
@@ -121,28 +121,7 @@ public class Gui {
 
 		JCheckBox chckbxAutomatica = new JCheckBox("Autom\u00E1tica");
 		panelConfigChcbx.add(chckbxAutomatica);
-		
-/****************Para impedir que as 2 checkbx estejam selecionadas ao msm tempo********/
-		chckbxManual.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (chckbxAutomatica.isSelected()) {
-					chckbxAutomatica.setSelected(false);
-				}
-			}
-		});
-		;
-		
-		chckbxAutomatica.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (chckbxManual.isSelected()) {
-					chckbxManual.setSelected(false);
-				}
-			}
-		});
-		;
-		
+
 		/* Falsos Positivos */
 		JLabel labelFP = new JLabel("FP");
 		panelConfigChcbx.add(labelFP);
@@ -190,16 +169,18 @@ public class Gui {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				try {
-					writeRules();
-//				} catch (NullPointerException exception) {
-//					System.out.println("");
-//				}
+				// try {
+				writeRules();
+				// } catch (NullPointerException exception) {
+				// System.out.println("");
+				// }
 
 			}
 		});
-		
-		/****************Para impedir que as 2 checkbx estejam selecionadas ao msm tempo********/
+
+		/****************
+		 * Para impedir que as 2 checkbx estejam selecionadas ao msm tempo
+		 ********/
 		chckbxManual.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -213,7 +194,7 @@ public class Gui {
 			}
 		});
 		;
-		
+
 		chckbxAutomatica.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -243,22 +224,22 @@ public class Gui {
 			}
 		});
 		;
-		/*botao Avaliar a config manual e inserir pf e fn*/
+		/* botao Avaliar a config manual e inserir pf e fn */
 		buttonAvalConfig.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AntiSpamFilterManual avalManual= 
-						new AntiSpamFilterManual(rulesList, spamTextField.getText(), hamTextField.getText());
-				fpTextField.setText(""+avalManual.getFP());
-				fnTextField.setText(""+avalManual.getFN());
-				
+				AntiSpamFilterManual avalManual = new AntiSpamFilterManual(rulesList, spamTextField.getText(),
+						hamTextField.getText());
+				fpTextField.setText("" + avalManual.getFP());
+				fnTextField.setText("" + avalManual.getFN());
+
 			}
 		});
 		;
 
 		JScrollPane scrollbar = new JScrollPane(table);
 		frame.getContentPane().add(scrollbar, BorderLayout.CENTER);
-		
+
 	}
 
 	/*
@@ -290,7 +271,6 @@ public class Gui {
 			public int getColumnCount() {
 				return 2;
 			}
-			
 
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -323,7 +303,7 @@ public class Gui {
 			if (model.getValueAt(i, 1) != null) {
 				String strWeight = (String) (model.getValueAt(i, 1));
 				double weight = Double.parseDouble(strWeight.trim());
-//				System.out.println(weight);
+				// System.out.println(weight);
 				rule.setWeight(Rule.adjustWeight(weight));
 			} else {
 				rule.setWeight(0.0);
@@ -331,14 +311,12 @@ public class Gui {
 
 		}
 	}
-	
-	
+
 	/* Escreve as regras e respetivos pesos */
 	private void writeRules() {
 		updateList();
 		try {
-			Writer writer = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream("./files/rules_v1.cf")));
+			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./files/rules_v1.cf")));
 			String rules = Rule.rulesListToString(rulesList);
 			writer.write(rules);
 			writer.close();
@@ -353,7 +331,7 @@ public class Gui {
 		System.out.println("DONE");
 	}
 
-	/*MAIN*/
+	/* MAIN */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
