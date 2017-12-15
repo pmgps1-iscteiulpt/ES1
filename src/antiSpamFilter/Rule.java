@@ -33,6 +33,7 @@ public class Rule {
 
 	/*alterar peso da regra*/
 	public void setWeight(Double weight) {
+		hasWeight = true;
 		this.weight = weight;
 	}
 
@@ -111,6 +112,51 @@ public class Rule {
 				str += rule.toString() + "\n";
 		}
 		return str;
+	}
+	
+	public static int pickIdealLine(String fileName) {
+		int res = -1;
+		try {
+			Scanner scanner = new Scanner(new File(fileName));
+			double aux = -6.0;
+			int i = 0;
+			while(scanner.hasNext()) {
+				String[] strVector = scanner.nextLine().split(" ");
+				double compare = Double.parseDouble(strVector[0].trim());
+				if(i == 0) {
+					aux = compare;
+					res = i;
+				}
+				else
+					if(compare < aux) {
+						aux = compare;
+						res = i;
+					}
+				i++;
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(res);
+		return res;
+	}
+	
+	public static String[] readAutomaticRules(String path, int line) {
+		try {
+			@SuppressWarnings("resource")
+			Scanner scanner = new Scanner(new File(path));
+			String weights = "";
+			for(int i=0; i < line; i++) {
+				weights = scanner.nextLine();
+			}
+			String[] weightsVector = weights.split(" ");
+			return weightsVector;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/*metodo que ajusta o peso se tiver fora dos limites*/

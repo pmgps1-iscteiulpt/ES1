@@ -26,12 +26,13 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 import antiSpamFilter.AntiSpamFilterManual;
 import antiSpamFilter.Rule;
 
 public class Gui {
 
-	private JFrame frame;
+	private JFrame frame; /*objeto da frame para interface grafica*/
 	private JTextField rulesTextField; /* Caixa de texto para o ficheiro roles */
 	private JTextField spamTextField; /* Caixa de texto para o ficheiro spam */
 	private JTextField hamTextField; /* caixa de texto para o ficheiro ham */
@@ -42,6 +43,9 @@ public class Gui {
 	private boolean editable; /* Serve para gerir a editabilidade da tabela */
 
 	private LinkedList<Rule> rulesList; /* Lista de regras */
+	
+	private static final String AUTO_WEIGHTS_PATH = 
+			"C:\\Users\\afons\\git\\ES1-2017-IC1-64\\ES1-2017-IC1-64\\experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.NSGAII.rs";
 
 	/**
 	 * Launch the application.
@@ -157,10 +161,49 @@ public class Gui {
 		buttonGerarConfig.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelSouth.add(buttonGerarConfig);
 		buttonGerarConfig.setEnabled(false);
+		
+		/*Ao carregar no botao configuracao automatica, o algoritmo é corrido
+		 * e os novos pesos são adicionados às regras*/
+		buttonGerarConfig.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AntiSpamFilterAutomaticConfiguration auto = new AntiSpamFilterAutomaticConfiguration();
+				try {
+					auto.main(null);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				int line = Rule.pickIdealLine(
+						"C:\\Users\\afons\\git\\ES1-2017-IC1-64\\"
+						+ "ES1-2017-IC1-64\\experimentBaseDirectory\\"
+						+ "referenceFronts\\AntiSpamFilterProblem.NSGAII.rf");
+				String[] weights = Rule.readAutomaticRules(
+						AUTO_WEIGHTS_PATH, line);
+				if(rulesList == null)
+					Gui.this.rulesList = Rule.readRulesFile("C:\\Users\\afons\\git\\ES1-2017-IC1-64\\ES1-2017-IC1-64\\files\\rules.cf");
+				for(int i=0; i < Gui.this.rulesList.size(); i++) {
+					Double weight = Double.parseDouble(weights[i].trim());
+					Gui.this.rulesList.get(i).setWeight(weight);
+				}
+				Gui.this.uploadRules();
+					
+			}
+		});
 
 		JButton buttonObterGrafico = new JButton("Obter Gr\u00E1fico");
 		panelSouth.add(buttonObterGrafico);
 		buttonObterGrafico.setEnabled(false);
+		
+		
+		buttonObterGrafico.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 
 		JButton buttonGravar = new JButton("Gravar");
 		panelSouth.add(buttonGravar);
@@ -219,7 +262,8 @@ public class Gui {
 			public void actionPerformed(ActionEvent e) {
 				if (chckbxManual.isSelected()) {
 					editable = true;
-					uploadRules(rulesTextField.getText());
+					Gui.this.rulesList = Rule.readRulesFile(rulesTextField.getText());
+					uploadRules();
 				}
 			}
 		});
@@ -246,8 +290,8 @@ public class Gui {
 	 * apï¿½s pressionar o botï¿½o de upload com path na text box as regras e
 	 * respetivos pesos sï¿½o apresentados numa tabela
 	 */
-	private void uploadRules(String rulesPath) {
-		this.rulesList = Rule.readRulesFile(rulesPath);
+	private void uploadRules() {
+		@SuppressWarnings("serial")
 		DefaultTableModel model = new DefaultTableModel() {
 
 			/* Vetor nomes das colunas */
@@ -293,7 +337,7 @@ public class Gui {
 		table.setModel(model);
 	}
 
-	/* faz update na lista de regras */
+	/* faz update na lista de regras a partir da tabela */
 	private void updateList() {
 		for (int i = 0; i < rulesList.size(); i++) {
 			Rule rule = rulesList.get(i);

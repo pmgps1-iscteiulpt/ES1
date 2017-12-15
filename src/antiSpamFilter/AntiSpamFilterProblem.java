@@ -7,10 +7,13 @@ import org.uma.jmetal.problem.impl.AbstractDoubleProblem;
 import org.uma.jmetal.solution.DoubleSolution;
 
 public class AntiSpamFilterProblem extends AbstractDoubleProblem {
+	
+	private static final int NUM_OF_RULES = 335;
+	private static final int THRESHOLD = 5;
 
 	  public AntiSpamFilterProblem() {
 	    // 10 variables (anti-spam filter rules) by default 
-	    this(10);
+	    this(NUM_OF_RULES);
 	  }
 
 	  public AntiSpamFilterProblem(Integer numberOfVariables) {
@@ -47,7 +50,6 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	    for (int var = 0; var < solution.getNumberOfVariables(); var++) {
 	    	fx[1] += Math.abs(x[1]); // Example for testing
 	    }
-
 	    solution.setObjective(0, fx[0]);
 	    solution.setObjective(1, fx[1]);
 	  }
