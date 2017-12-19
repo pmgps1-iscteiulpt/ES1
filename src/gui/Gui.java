@@ -26,13 +26,17 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import org.uma.jmetal.solution.DoubleSolution;
+import org.uma.jmetal.solution.Solution;
+
 import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 import antiSpamFilter.AntiSpamFilterManual;
+import antiSpamFilter.AntiSpamFilterProblem;
 import antiSpamFilter.Rule;
 
 public class Gui {
 
-	private JFrame frame; /*objeto da frame para interface grafica*/
+	private JFrame frame; /* objeto da frame para interface grafica */
 	private JTextField rulesTextField; /* Caixa de texto para o ficheiro roles */
 	private JTextField spamTextField; /* Caixa de texto para o ficheiro spam */
 	private JTextField hamTextField; /* caixa de texto para o ficheiro ham */
@@ -43,9 +47,8 @@ public class Gui {
 	private boolean editable; /* Serve para gerir a editabilidade da tabela */
 
 	private LinkedList<Rule> rulesList; /* Lista de regras */
-	
-	private static final String AUTO_WEIGHTS_PATH = 
-			"C:\\Users\\afons\\git\\ES1-2017-IC1-64\\ES1-2017-IC1-64\\experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.NSGAII.rs";
+
+	private static final String AUTO_WEIGHTS_PATH = "experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rs";
 
 	/**
 	 * Launch the application.
@@ -80,6 +83,7 @@ public class Gui {
 		hamPanel.add(hamLabel);
 
 		hamTextField = new JTextField();
+		hamTextField.setText("files/ham.log.txt");
 		hamPanel.add(hamTextField);
 		hamTextField.setColumns(50);
 		/****************************************/
@@ -92,6 +96,7 @@ public class Gui {
 		spamPanel.add(spamLabel);
 
 		spamTextField = new JTextField();
+		spamTextField.setText("files/spam.log.txt");
 		spamPanel.add(spamTextField);
 		spamTextField.setColumns(50);
 		/******************************************/
@@ -105,6 +110,7 @@ public class Gui {
 		rulesPanel.add(rulesLabel);
 
 		rulesTextField = new JTextField();
+		rulesTextField.setText("files/rules.cf");
 		rulesPanel.add(rulesTextField);
 		rulesTextField.setColumns(50);
 
@@ -161,11 +167,13 @@ public class Gui {
 		buttonGerarConfig.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelSouth.add(buttonGerarConfig);
 		buttonGerarConfig.setEnabled(false);
-		
-		/*Ao carregar no botao configuracao automatica, o algoritmo é corrido
-		 * e os novos pesos são adicionados às regras*/
+
+		/*
+		 * Ao carregar no botao configuracao automatica, o algoritmo é corrido e os
+		 * novos pesos são adicionados às regras
+		 */
 		buttonGerarConfig.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				AntiSpamFilterAutomaticConfiguration auto = new AntiSpamFilterAutomaticConfiguration();
@@ -175,33 +183,28 @@ public class Gui {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				int line = Rule.pickIdealLine(
-						"C:\\Users\\afons\\git\\ES1-2017-IC1-64\\"
-						+ "ES1-2017-IC1-64\\experimentBaseDirectory\\"
-						+ "referenceFronts\\AntiSpamFilterProblem.NSGAII.rf");
-				String[] weights = Rule.readAutomaticRules(
-						AUTO_WEIGHTS_PATH, line);
-				if(rulesList == null)
-					Gui.this.rulesList = Rule.readRulesFile("C:\\Users\\afons\\git\\ES1-2017-IC1-64\\ES1-2017-IC1-64\\files\\rules.cf");
-				for(int i=0; i < Gui.this.rulesList.size(); i++) {
+				int line = Rule
+						.pickIdealLine("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rf");
+				String[] weights = Rule.readAutomaticRules(AUTO_WEIGHTS_PATH, line);
+				if (rulesList == null)
+					Gui.this.rulesList = Rule.readRulesFile(rulesTextField.getText());
+				for (int i = 0; i < Gui.this.rulesList.size(); i++) {
 					Double weight = Double.parseDouble(weights[i].trim());
 					Gui.this.rulesList.get(i).setWeight(weight);
 				}
 				Gui.this.uploadRules();
-					
 			}
 		});
 
 		JButton buttonObterGrafico = new JButton("Obter Gr\u00E1fico");
 		panelSouth.add(buttonObterGrafico);
 		buttonObterGrafico.setEnabled(false);
-		
-		
+
 		buttonObterGrafico.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
 
@@ -231,9 +234,15 @@ public class Gui {
 					chckbxAutomatica.setSelected(false);
 					buttonGerarConfig.setEnabled(false);
 					buttonObterGrafico.setEnabled(false);
+						
 				}
+				
 				buttonAvalConfig.setEnabled(true);
 				buttonGravar.setEnabled(true);
+				if (!chckbxManual.isSelected()) {
+						buttonAvalConfig.setEnabled(false);
+						buttonGravar.setEnabled(false);
+				}
 			}
 		});
 		;
@@ -248,6 +257,10 @@ public class Gui {
 				}
 				buttonGerarConfig.setEnabled(true);
 				buttonObterGrafico.setEnabled(true);
+				if(!chckbxAutomatica.isSelected()) {
+					buttonGerarConfig.setEnabled(false);
+					buttonObterGrafico.setEnabled(false);
+				}
 			}
 		});
 		;
@@ -276,7 +289,6 @@ public class Gui {
 						hamTextField.getText());
 				fpTextField.setText("" + avalManual.getFP());
 				fnTextField.setText("" + avalManual.getFN());
-
 			}
 		});
 		;
@@ -388,5 +400,4 @@ public class Gui {
 			}
 		});
 	}
-
 }

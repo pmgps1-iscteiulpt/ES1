@@ -37,7 +37,6 @@ public class AntiSpamFilterManual {
 					}
 				}
 			}
-			System.out.println(count);
 			if (count < THRESHOLD)
 				fn++;
 		}

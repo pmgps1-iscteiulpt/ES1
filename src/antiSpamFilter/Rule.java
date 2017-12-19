@@ -138,7 +138,6 @@ public class Rule {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(res);
 		return res;
 	}
 	

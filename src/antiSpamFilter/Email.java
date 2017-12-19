@@ -11,14 +11,11 @@ public class Email {
 	/*Construtor, recebe a string do email que esta no ficheiro*/
 	public Email(String email) {
 		rulesPerMail = new LinkedList<>();
-		System.out.println(email);
 		String[] argumentos = email.split("\\s+");  /* documento usa tabs*/
-		System.out.println(argumentos.length);
 		id = argumentos[0].trim();
 
 		for (int i = 1; i < argumentos.length; i++) {
 			Rule rule = new Rule(argumentos[i].trim());
-			System.out.println(rule.getName());
 			rulesPerMail.add(rule);
 		}
 	}
