@@ -35,17 +35,17 @@ import antiSpamFilter.Rule;
 
 public class Gui {
 
-	private JFrame frame; /* objeto da frame para interface grafica */
-	private JTextField rulesTextField; /* Caixa de texto para o ficheiro roles */
-	private JTextField spamTextField; /* Caixa de texto para o ficheiro spam */
-	private JTextField hamTextField; /* caixa de texto para o ficheiro ham */
-	private JTextField fpTextField; /* text field para os falsos positivos */
-	private JTextField fnTextField; /* text field para os falsos negativos */
+	private JFrame frame; /** objeto da frame para interface grafica */
+	private JTextField rulesTextField; /** Caixa de texto para o ficheiro roles */
+	private JTextField spamTextField; /** Caixa de texto para o ficheiro spam */
+	private JTextField hamTextField; /** caixa de texto para o ficheiro ham */
+	private JTextField fpTextField; /** text field para os falsos positivos */
+	private JTextField fnTextField; /** text field para os falsos negativos */
 	private JTable table;
 
-	private boolean editable; /* Serve para gerir a editabilidade da tabela */
+	private boolean editable; /** Serve para gerir a editabilidade da tabela */
 
-	private LinkedList<Rule> rulesList; /* Lista de regras */
+	private LinkedList<Rule> rulesList; /** Lista de regras */
 
 	private static final String AUTO_WEIGHTS_PATH = "experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rs";
 
@@ -146,8 +146,7 @@ public class Gui {
 		panelConfigChcbx.add(fpTextField);
 		fpTextField.setColumns(10);
 		fpTextField.setEditable(false);
-		/**/
-		/* Falsos Negativos */
+		/** Falsos Negativos */
 		JLabel labelFN = new JLabel("FN");
 		panelConfigChcbx.add(labelFN);
 
@@ -174,7 +173,7 @@ public class Gui {
 		panelSouth.add(buttonGerarConfig);
 		buttonGerarConfig.setEnabled(false);
 
-		/*
+		/**
 		 * Ao carregar no botao configuracao automatica, o algoritmo é corrido e os
 		 * novos pesos são adicionados às regras
 		 */
@@ -305,10 +304,10 @@ public class Gui {
 		;
 		/***********************************************/
 
-		/* Tabela para regras */
+		/** Tabela para regras */
 		table = new JTable();
 
-		/* Aï¿½ï¿½o para carregar no botï¿½o e apresentar regras na tabela */
+		/** Aï¿½ï¿½o para carregar no botï¿½o e apresentar regras na tabela */
 		rulesUploadButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -320,7 +319,7 @@ public class Gui {
 			}
 		});
 		;
-		/* botao Avaliar a config manual e inserir pf e fn */
+		/** botao Avaliar a config manual e inserir pf e fn */
 		buttonAvalConfig.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -337,7 +336,7 @@ public class Gui {
 
 	}
 
-	/*
+	/**
 	 * apï¿½s pressionar o botï¿½o de upload com path na text box as regras e
 	 * respetivos pesos sï¿½o apresentados numa tabela
 	 */
@@ -345,23 +344,23 @@ public class Gui {
 		@SuppressWarnings("serial")
 		DefaultTableModel model = new DefaultTableModel() {
 
-			/* Vetor nomes das colunas */
+			/** Vetor nomes das colunas */
 			String[] colNames = { "Rule", "Weight" };
 
-			/* Nomes das Colunas */
+			/** Nomes das Colunas */
 			@Override
 			public String getColumnName(int column) {
 				// TODO Auto-generated method stub
 				return colNames[column];
 			}
 
-			/* Numero de Linhas */
+			/** Numero de Linhas */
 			@Override
 			public int getRowCount() {
 				return rulesList.size();
 			}
 
-			/* Numero de Colunas */
+			/** Numero de Colunas */
 			@Override
 			public int getColumnCount() {
 				return 2;
@@ -388,7 +387,7 @@ public class Gui {
 		table.setModel(model);
 	}
 
-	/* faz update na lista de regras a partir da tabela */
+	/** faz update na lista de regras a partir da tabela */
 	private void updateList() {
 		for (int i = 0; i < rulesList.size(); i++) {
 			Rule rule = rulesList.get(i);
@@ -407,7 +406,7 @@ public class Gui {
 		}
 	}
 
-	/* Escreve as regras e respetivos pesos */
+	/** Escreve as regras e respetivos pesos */
 	private void writeRules() {
 		updateList();
 		try {
@@ -426,7 +425,7 @@ public class Gui {
 		System.out.println("DONE");
 	}
 
-	/* MAIN */
+	/** MAIN */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

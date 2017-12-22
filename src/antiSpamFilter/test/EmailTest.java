@@ -28,7 +28,7 @@ class EmailTest {
 	Email email3;
 	Email email4;
 	
-	/*
+	/**
 	 * Atributos do tipo String para fins de teste (nomear os emails)
 	 */
 	
