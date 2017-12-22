@@ -26,12 +26,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import org.uma.jmetal.solution.DoubleSolution;
-import org.uma.jmetal.solution.Solution;
-
 import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 import antiSpamFilter.AntiSpamFilterManual;
-import antiSpamFilter.AntiSpamFilterProblem;
 import antiSpamFilter.Rule;
 
 public class Gui {
@@ -174,6 +170,7 @@ public class Gui {
 		 */
 		buttonGerarConfig.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("static-access")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				AntiSpamFilterAutomaticConfiguration auto = new AntiSpamFilterAutomaticConfiguration();

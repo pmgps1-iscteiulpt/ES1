@@ -1,11 +1,6 @@
 package antiSpamFilter;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.LinkedList;
-import java.util.Scanner;
-
-import javax.swing.JOptionPane;
 
 public class AntiSpamFilterManual {
 
@@ -56,47 +51,25 @@ public class AntiSpamFilterManual {
 
 	}
 
-	/*metodo que le o ficheiro ham*/
-	protected void readHamFile(String fileName) {
-		Scanner file;
-		try {
-			file = new Scanner(new File(fileName));
-
-			while (file.hasNext()) {
-				String line = file.nextLine();
-				Email email = new Email(line);
-				emailHam.add(email);
-			}
-			file.close();
-		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "Path Not Found!");
-		}
+	public LinkedList<Email> getEmailHam() {
+		return emailHam;
 	}
 
-	/*metodo que le o ficheiro spam*/
-	protected void readSpamFile(String fileName) {
-		Scanner file;
-		try {
-			file = new Scanner(new File(fileName));
-
-			while (file.hasNext()) {
-				String line = file.nextLine();
-				Email email = new Email(line);
-				emailSpam.add(email);
-			}
-			file.close();
-		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "Path Not Found!");
-		}
-
+	public LinkedList<Email> getEmailSpam() {
+		return emailSpam;
 	}
-
+	
 	public int getFN() {
 		return fn;
 	}
-
+	
 	public int getFP() {
 		return fp;
 	}
+	
+	public LinkedList<Rule> getRules() {
+		return rules;
+	}
+	
 
 }
