@@ -257,7 +257,12 @@ public class Gui {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				writeRules();
+				String path = "";
+				if(chckbxAutomatica.isSelected())
+					path = "AntiSpamConfigurationForProfessionalMailbox/rules_Automatic.cf";
+				else
+					path = "files/rules_Manual.cf";
+				writeRules(path);
 				updateList();
 			}
 		});
@@ -279,7 +284,7 @@ public class Gui {
 				buttonGravar.setEnabled(true);
 				if (!chckbxManual.isSelected()) {
 					buttonAvalConfig.setEnabled(false);
-					buttonGravar.setEnabled(false);
+					buttonGravar.setEnabled(true);
 				}
 			}
 		});
@@ -291,7 +296,7 @@ public class Gui {
 				if (chckbxManual.isSelected()) {
 					chckbxManual.setSelected(false);
 					buttonAvalConfig.setEnabled(false);
-					buttonGravar.setEnabled(false);
+					buttonGravar.setEnabled(true);
 				}
 				buttonGerarConfig.setEnabled(true);
 				buttonObterGrafico.setEnabled(true);
@@ -407,10 +412,10 @@ public class Gui {
 	}
 
 	/** Escreve as regras e respetivos pesos */
-	private void writeRules() {
+	private void writeRules(String filePath) {
 		updateList();
 		try {
-			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./files/rules_v1.cf")));
+			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("files/rules_v1.cf")));
 			String rules = Rule.rulesListToString(rulesList);
 			writer.write(rules);
 			writer.close();
