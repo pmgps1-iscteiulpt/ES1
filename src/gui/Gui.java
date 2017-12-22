@@ -59,6 +59,13 @@ public class Gui {
 	public Gui() {
 		initialize();
 	}
+	
+	/**
+	 * metodo para mostrar o GUI ao utilizador para comecar a utilizacao do software
+	 */
+	public void start() {
+		frame.setVisible(true);
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -231,7 +238,7 @@ public class Gui {
 			public void actionPerformed(ActionEvent e) {
 				String[] params = new String [2];
 				params[0] = "C:\\Program Files\\R\\R-3.4.3\\bin\\x64\\Rscript.exe";
-				params[1] = "C:\\Users\\pedro\\git\\ES1-2017-IC1-64\\experimentBaseDirectory\\AntiSpamStudy\\R\\HV.Boxplot.R";
+				params[1] = "experimentBaseDirectory/AntiSpamStudy/R/HV.Boxplot.R";
 				String[] envp = new String [1];
 				envp[0] = "Path=C:\\Program Files\\R\\R-3.4.1\\bin\\x64";
 				try {
