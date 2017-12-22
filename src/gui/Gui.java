@@ -217,6 +217,7 @@ public class Gui {
 			public void actionPerformed(ActionEvent e) {
 				// try {
 				writeRules();
+				updateList();
 				// } catch (NullPointerException exception) {
 				// System.out.println("");
 				// }
@@ -234,14 +235,14 @@ public class Gui {
 					chckbxAutomatica.setSelected(false);
 					buttonGerarConfig.setEnabled(false);
 					buttonObterGrafico.setEnabled(false);
-						
+
 				}
-				
+
 				buttonAvalConfig.setEnabled(true);
 				buttonGravar.setEnabled(true);
 				if (!chckbxManual.isSelected()) {
-						buttonAvalConfig.setEnabled(false);
-						buttonGravar.setEnabled(false);
+					buttonAvalConfig.setEnabled(false);
+					buttonGravar.setEnabled(false);
 				}
 			}
 		});
@@ -257,7 +258,7 @@ public class Gui {
 				}
 				buttonGerarConfig.setEnabled(true);
 				buttonObterGrafico.setEnabled(true);
-				if(!chckbxAutomatica.isSelected()) {
+				if (!chckbxAutomatica.isSelected()) {
 					buttonGerarConfig.setEnabled(false);
 					buttonObterGrafico.setEnabled(false);
 				}

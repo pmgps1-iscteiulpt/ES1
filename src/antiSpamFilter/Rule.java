@@ -20,7 +20,7 @@ public class Rule {
 
 	/*alterar nome da regra*/
 	public void setName(String name) {
-		this.name = name;
+		this.name = name; 
 	}
 
 	/* Peso */
@@ -138,7 +138,7 @@ public class Rule {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return res;
+		return res+1;
 	}
 	
 	public static String[] readAutomaticRules(String path, int line) {

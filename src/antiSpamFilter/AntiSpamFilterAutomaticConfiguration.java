@@ -39,7 +39,7 @@ public class AntiSpamFilterAutomaticConfiguration {
             .setAlgorithmList(algorithmList)
             .setProblemList(problemList)
             .setExperimentBaseDirectory(experimentBaseDirectory)
-            .setOutputParetoFrontFileName("FUN")
+            .setOutputParetoFrontFileName("FUN") 
             .setOutputParetoSetFileName("VAR")
             .setReferenceFrontDirectory(experimentBaseDirectory+"/referenceFronts")
             .setIndicatorList(Arrays.asList(new PISAHypervolume<DoubleSolution>()))
