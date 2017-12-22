@@ -13,3 +13,8 @@ Identifica√ß√£o da variante do projeto desenvolvida:
 
 Link para um v√≠deo no youtube com a demonstra√ß√£o da aplica√ß√£o final desenvolvida:
 	- https://www.youtube.com/watch?v=bMQs56MhYa0
+	
+Notas:programa demora algum tempo a correr a configuraÁ„o autom·tica
+		N„o foram respeitados alguns principios do scrum
+		convem ser corrido no eclipse devido ‡ escrita e leitura de ficheiros
+		N„o foi efectuado SprintRetrospective.txt
