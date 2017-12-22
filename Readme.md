@@ -12,4 +12,4 @@ Identificação da variante do projeto desenvolvida:
 	- Profissional
 
 Link para um vídeo no youtube com a demonstração da aplicação final desenvolvida:
-	- TBD
+	- https://www.youtube.com/watch?v=bMQs56MhYa0
