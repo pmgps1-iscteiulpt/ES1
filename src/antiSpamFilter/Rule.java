@@ -20,7 +20,7 @@ public class Rule {
 
 	/*alterar nome da regra*/
 	public void setName(String name) {
-		this.name = name;
+		this.name = name; 
 	}
 
 	/* Peso */

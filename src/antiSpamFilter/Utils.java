@@ -8,17 +8,37 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class Utils {
-	private final String rule="files/rules.cf";
-	private final String spam="files/spam.log.txt";
-	private final String ham="files/ham.log.txt";
-	LinkedList<Rule> rules; /*lista de regras*/
-	LinkedList<Email> emailHam; /*E mails considerados legitimos*/
-	LinkedList<Email> emailSpam; /*E mails considerados spam*/
-	
+	private String rule="";
+	private String spam=""; 
+	private String ham="";
+	private LinkedList<Rule> rules; /*lista de regras*/
+	private LinkedList<Email> emailHam; /*E mails considerados legitimos*/
+	private LinkedList<Email> emailSpam; /*E mails considerados spam*/
+	/**
+	 * construtor para config automatica
+	 */
 	public Utils() {
+		rule="files/rules.cf";
+		String spam="files/spam.log.txt";
+		String ham="files/ham.log.txt";
 		emailHam = new LinkedList<>();
 		emailSpam = new LinkedList<>();
 		rules=readRulesFile(rule);
+		readHamFile(ham);
+		readSpamFile(spam);
+	}
+	/**
+	 * construtor para config manual
+	 * @param rules2-lista de regras
+	 * @param spam-nome ficheiro spam
+	 * @param ham-nome ficheiro ham
+	 */
+	public Utils(LinkedList<Rule> rules2,String spam, String ham) {
+		emailHam = new LinkedList<>();
+		emailSpam = new LinkedList<>();
+		this.rules=rules2;
+		this.spam=spam;
+		this.ham=ham;
 		readHamFile(ham);
 		readSpamFile(spam);
 	}
@@ -90,9 +110,6 @@ public class Utils {
 	private static Rule readRule(String s) {
 		if (s.contains("=")) {
 			String[] vector = s.split("=");
-			// for(String str : vector)
-			// str.trim();
-
 			return new Rule(vector[0].trim(), Double.parseDouble(vector[1].trim()));
 		} else {
 			return new Rule(s.trim());
