@@ -10,47 +10,56 @@ import javax.swing.JOptionPane;
 
 public class Rule {
 
-	/* Nome da Regra */
+	/**
+	 *  Nome da Regra */
 	private String name;
 
-	/*obter nome da regra*/
+	/**
+	 * @return obter nome da regra*/
 	public String getName() {
 		return name;
 	}
 
-	/*alterar nome da regra*/
+	/**
+	 * @return alterar nome da regra*/
 	public void setName(String name) {
 		this.name = name; 
 	}
 
-	/* Peso */
+	/**
+	 * @return  Peso */
 	private Double weight;
 
-	/*obter peso da regra*/
+	/**
+	 * @return obter peso da regra*/
 	public Double getWeight() {
 			return weight;
 	}
 
-	/*alterar peso da regra*/
+	/**
+	 * @return alterar peso da regra*/
 	public void setWeight(Double weight) {
 		hasWeight = true;
 		this.weight = weight;
 	}
 
-	/* Variï¿½vel que indica se a regra tem, ou nï¿½o, peso */
+	/**
+	 * @return  Variï¿½vel que indica se a regra tem, ou nï¿½o, peso */
 	private boolean hasWeight;
 
-	/*obter peso*/
+	/**
+	 * @return obter peso*/
 	public boolean hasWeight() {
 		return hasWeight;
 	}
 
-	/*alterar peso*/
+	/**
+	 * @return alterar peso*/
 	public void setHasWeight(boolean hasWeight) {
 		this.hasWeight = hasWeight;
 	}
 
-	/*
+	/**
 	 * Construtor que sï¿½ estabelece o nome para o ficheiro inicial que ainda nï¿½o
 	 * tem pesos
 	 */
@@ -59,15 +68,16 @@ public class Rule {
 		this.hasWeight = false;
 	}
 
-	/* Construtor para quando o ficheiro jï¿½ contï¿½m pesos */
+	/**
+	 * @return  Construtor para quando o ficheiro jï¿½ contï¿½m pesos */
 	public Rule(String name, double weight) {
 		this.name = name;
 		this.weight = weight;
 		this.hasWeight = true;
 	}
 
-	/*
-	 * Lï¿½ um ficheiro de regras e devolve uma lista com as regras e respetivos
+	/**
+	 *@return  Lï¿½ um ficheiro de regras e devolve uma lista com as regras e respetivos
 	 * pesos
 	 */
 	public static LinkedList<Rule> readRulesFile(String fileName) {
@@ -89,20 +99,19 @@ public class Rule {
 		return rulesList;
 	}
 
-	/* Lï¿½ a String de uma linha do ficheiro rules e devolve um objeto Rule */
+	/**
+	 * @return  Lï¿½ a String de uma linha do ficheiro rules e devolve um objeto Rule */
 	private static Rule readRule(String s) {
 		if (s.contains("=")) {
 			String[] vector = s.split("=");
-			// for(String str : vector)
-			// str.trim();
-
 			return new Rule(vector[0].trim(), Double.parseDouble(vector[1].trim()));
 		} else {
 			return new Rule(s.trim());
 		}
 	}
 
-	/*metodo que converte uma lista de regras para uma string, para posteriormente
+	/**
+	 * @return metodo que converte uma lista de regras para uma string, para posteriormente
 	 * essa string ser escrita num ficheiro*/
 	public static String rulesListToString(List<Rule> list) {
 		String str = "";
@@ -148,6 +157,12 @@ public class Rule {
 		return res+1;
 	}
 	
+	/**
+	 * 
+	 * @param path recebe linha do ficheiro que tem o peso das regras da conf automatica
+	 * @param line
+	 * @return pesos da configuração automatica
+	 */
 	public static String[] readAutomaticRules(String path, int line) {
 		try {
 			@SuppressWarnings("resource")
@@ -165,7 +180,8 @@ public class Rule {
 		return null;
 	}
 
-	/*metodo que ajusta o peso se tiver fora dos limites*/
+	/**
+	 * @return metodo que ajusta o peso se tiver fora dos limites*/
 	public static double adjustWeight(double weight) {
 		if (weight < -5)
 			return -5;
@@ -174,7 +190,8 @@ public class Rule {
 		return weight;
 	}
 
-	/*metodo to string da regra -> disposicao de cada regra no ficheiro*/
+	/**
+	 * @return metodo to string da regra -> disposicao de cada regra no ficheiro*/
 	@Override
 	public String toString() {
 		if (weight == null)
@@ -182,7 +199,9 @@ public class Rule {
 		else
 			return name + "=" + weight;
 	}
-	
+	/**
+	 * @return redefinição do metodo do equals
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		Rule rule = (Rule) obj;

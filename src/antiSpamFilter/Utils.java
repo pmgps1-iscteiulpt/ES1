@@ -13,9 +13,9 @@ public class Utils {
 	private String spam = "";
 	@SuppressWarnings("unused")
 	private String ham = "";
-	private LinkedList<Rule> rules; /* lista de regras */
-	private LinkedList<Email> emailHam; /* E mails considerados legitimos */
-	private LinkedList<Email> emailSpam; /* E mails considerados spam */
+	private LinkedList<Rule> rules; /** lista de regras */
+	private LinkedList<Email> emailHam; /** E mails considerados legitimos */
+	private LinkedList<Email> emailSpam; /** E mails considerados spam */
 
 	/**
 	 * construtor para config automatica
@@ -47,18 +47,34 @@ public class Utils {
 		emailSpam = readSpamFile(spam);
 	}
 
+	/**
+	 * 
+	 * @return devolve lista de email Ham
+	 */
 	public LinkedList<Email> getEmailHam() {
 		return emailHam;
 	}
 
+	/**
+	 * 
+	 * @return devolve lista com email spam
+	 */
 	public LinkedList<Email> getEmailSpam() {
 		return emailSpam;
 	}
-
+/**
+ * 
+ * @return devolve lista com as regras
+ */
 	public LinkedList<Rule> getRules() {
 		return rules;
 	}
 
+	/**
+	 * 
+	 * @param fileName
+	 * @return devolve lista dos emails ham
+	 */
 	public static LinkedList<Email> readHamFile(String fileName) {
 		LinkedList<Email> list = new LinkedList<Email>();
 		Scanner file;
@@ -77,7 +93,10 @@ public class Utils {
 		return list;
 	}
 
-	/* metodo que le o ficheiro spam */
+	/**
+	 * @return metodo que le o ficheiro spam 
+	 * 
+	 */
 	public static LinkedList<Email> readSpamFile(String fileName) {
 		LinkedList<Email> list = new LinkedList<Email>();
 		Scanner file;

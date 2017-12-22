@@ -10,11 +10,15 @@ import org.uma.jmetal.solution.DoubleSolution;
 @SuppressWarnings("serial")
 public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 
-	private static final int NUM_OF_RULES = 335; /* # de regras de file config */
+	private static final int NUM_OF_RULES = 335; /**
+	 												# de regras de file config */
 	private static final int THRESHOLD = 5;
-	private LinkedList<Email> emailHam; /* E mails considerados legitimos */
-	private LinkedList<Email> emailSpam; /* E mails considerados spam */
-	private LinkedList<Rule> rules;
+	private LinkedList<Email> emailHam; /** 
+											E mails considerados legitimos */
+	private LinkedList<Email> emailSpam; /** 
+											E mails considerados spam */
+	private LinkedList<Rule> rules;/**
+	 								Lista com as regras*/
 
 	public AntiSpamFilterProblem() {
 		this(NUM_OF_RULES);
