@@ -114,6 +114,11 @@ public class Rule {
 		return str;
 	}
 	
+	/**
+	 * Metodo para escolher a linha do ficheiro que contem os fp e fn da configuracao automatica
+	 * @param fileName
+	 * @return
+	 */
 	public static int pickIdealLine(String fileName) {
 		int res = -1;
 		try {
@@ -138,7 +143,7 @@ public class Rule {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return res;
+		return res+1;
 	}
 	
 	public static String[] readAutomaticRules(String path, int line) {
@@ -174,6 +179,13 @@ public class Rule {
 			return name;
 		else
 			return name + "=" + weight;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Rule rule = (Rule) obj;
+		return (this.weight==rule.weight 
+				&& this.name.equals(rule.name));
 	}
 
 }

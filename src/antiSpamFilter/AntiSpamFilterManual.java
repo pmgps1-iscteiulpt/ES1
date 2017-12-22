@@ -56,7 +56,7 @@ public class AntiSpamFilterManual {
 	}
 
 	/*metodo que le o ficheiro ham*/
-	private void readHamFile(String fileName) {
+	protected void readHamFile(String fileName) {
 		Scanner file;
 		try {
 			file = new Scanner(new File(fileName));
@@ -73,7 +73,7 @@ public class AntiSpamFilterManual {
 	}
 
 	/*metodo que le o ficheiro spam*/
-	private void readSpamFile(String fileName) {
+	protected void readSpamFile(String fileName) {
 		Scanner file;
 		try {
 			file = new Scanner(new File(fileName));

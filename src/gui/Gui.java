@@ -215,11 +215,8 @@ public class Gui {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// try {
 				writeRules();
-				// } catch (NullPointerException exception) {
-				// System.out.println("");
-				// }
+				updateList();
 
 			}
 		});
