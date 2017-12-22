@@ -79,6 +79,7 @@ public class Rule {
 			while (file.hasNext()) {
 				String line = file.nextLine();
 				Rule rule = readRule(line);
+				rule.setWeight(0.0);
 				rulesList.add(rule);
 			}
 			file.close();
@@ -122,6 +123,7 @@ public class Rule {
 	public static int pickIdealLine(String fileName) {
 		int res = -1;
 		try {
+			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(new File(fileName));
 			double aux = -6.0;
 			int i = 0;

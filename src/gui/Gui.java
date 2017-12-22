@@ -29,13 +29,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import org.uma.jmetal.solution.DoubleSolution;
-import org.uma.jmetal.solution.Solution;
-
 import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 import antiSpamFilter.AntiSpamFilterManual;
-import antiSpamFilter.AntiSpamFilterProblem;
-import antiSpamFilter.Email;
 import antiSpamFilter.Rule;
 
 public class Gui {
@@ -178,6 +173,7 @@ public class Gui {
 		 */
 		buttonGerarConfig.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("static-access")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				AntiSpamFilterAutomaticConfiguration auto = new AntiSpamFilterAutomaticConfiguration();
@@ -202,6 +198,7 @@ public class Gui {
 				Gui.this.uploadRules();
 			}
 
+			@SuppressWarnings("resource")
 			private String[] getfpfn(int linha) {
 				Scanner file;
 				try {
@@ -234,7 +231,7 @@ public class Gui {
 			public void actionPerformed(ActionEvent e) {
 				String[] params = new String [2];
 				params[0] = "C:\\Program Files\\R\\R-3.4.3\\bin\\x64\\Rscript.exe";
-				params[1] = "experimentBaseDirectory/AntiSpamStudy/R/HV.Boxplot.R";
+				params[1] = "C:\\Users\\pedro\\git\\ES1-2017-IC1-64\\experimentBaseDirectory\\AntiSpamStudy\\R\\HV.Boxplot.R";
 				String[] envp = new String [1];
 				envp[0] = "Path=C:\\Program Files\\R\\R-3.4.1\\bin\\x64";
 				try {

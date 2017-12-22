@@ -1,19 +1,13 @@
 package antiSpamFilter;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
-
-import javax.swing.JOptionPane;
 
 import org.uma.jmetal.problem.impl.AbstractDoubleProblem;
 import org.uma.jmetal.solution.DoubleSolution;
 
-import gui.Gui;
-
+@SuppressWarnings("serial")
 public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 
 	private static final int NUM_OF_RULES = 335; /* # de regras de file config */
@@ -50,6 +44,8 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	public void evaluate(DoubleSolution solution) {
 		int fp = 0;
 		int fn = 0;
+		fp = 0;
+		fn = 0;
 		double[] x = new double[getNumberOfVariables()];
 		for (int i = 0; i < solution.getNumberOfVariables(); i++) {
 			x[i] = solution.getVariableValue(i);

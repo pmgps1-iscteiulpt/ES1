@@ -1,42 +1,34 @@
 package antiSpamFilter.test;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.Assert.*;
 
 import java.util.LinkedList;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import antiSpamFilter.AntiSpamFilterManual;
-import antiSpamFilter.Email;
 import antiSpamFilter.Rule;
 
 class AntiSpamFilterManualTest {
 	
-
 	/**
-	 * Esta classe JUnit testa a classe AntiSpamFilterManual
-	 * @author agasa-iscteiulpt
+	 * Esta classe serve para realizar testes unitarios da classe AntiSpamFilterManual
 	 */
 
 	/**
-	 * Atributos para testar a classe
+	 * Inicializacao de variaveis para usar nos testes
 	 */
+	LinkedList<Rule> rulesList = Rule.readRulesFile("testFiles/rules.cf");
+	AntiSpamFilterManual manual;
 	
-	LinkedList<Rule> rulesList;
-	LinkedList<Email> emailHam;
-	LinkedList<Email> emailSpam;
-	
-	String hamPath = "/files/ham.log.txt";
-	String spamPath = "/files/spam.log.txt";
-	
-	@Before
-	void setUp() throws Exception {
-	}
-
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void test() throws Exception {
+		manual = new AntiSpamFilterManual(rulesList, 
+				"testFiles/spam.log.txt", 
+				"testFiles/ham.log.txt");
+		assertEquals(manual.getEmailHam().size(),695);
+		assertEquals(manual.getEmailSpam().size(),239);
+		assertEquals(manual.getRules().size(), 335);
 	}
 
 }

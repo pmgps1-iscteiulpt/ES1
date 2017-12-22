@@ -1,11 +1,6 @@
 package antiSpamFilter;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.LinkedList;
-import java.util.Scanner;
-
-import javax.swing.JOptionPane;
 
 public class AntiSpamFilterManual {
 
@@ -52,7 +47,16 @@ public class AntiSpamFilterManual {
 			if (count > THRESHOLD)
 				fp++;
 		}
+	}
 
+	
+
+	public LinkedList<Email> getEmailHam() {
+		return emailHam;
+	}
+
+	public LinkedList<Email> getEmailSpam() {
+		return emailSpam;
 	}
 
 	public int getFN() {
@@ -61,6 +65,10 @@ public class AntiSpamFilterManual {
 
 	public int getFP() {
 		return fp;
+	}
+
+	public LinkedList<Rule> getRules() {
+		return rules;
 	}
 
 }
