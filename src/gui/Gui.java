@@ -7,17 +7,20 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -32,6 +35,7 @@ import org.uma.jmetal.solution.Solution;
 import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 import antiSpamFilter.AntiSpamFilterManual;
 import antiSpamFilter.AntiSpamFilterProblem;
+import antiSpamFilter.Email;
 import antiSpamFilter.Rule;
 
 public class Gui {
@@ -185,6 +189,9 @@ public class Gui {
 				}
 				int line = Rule
 						.pickIdealLine("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rf");
+				String[] fpfn=getfpfn(line);
+				fpTextField.setText(fpfn[0]);
+				fnTextField.setText(fpfn[1]);
 				String[] weights = Rule.readAutomaticRules(AUTO_WEIGHTS_PATH, line);
 				if (rulesList == null)
 					Gui.this.rulesList = Rule.readRulesFile(rulesTextField.getText());
@@ -193,6 +200,27 @@ public class Gui {
 					Gui.this.rulesList.get(i).setWeight(weight);
 				}
 				Gui.this.uploadRules();
+			}
+
+			private String[] getfpfn(int linha) {
+				Scanner file;
+				try {
+					file = new Scanner(new File("experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rf"));
+					int count=1;
+					while (file.hasNext()) {
+						String line=file.nextLine();
+						if (count==linha) {
+							String[] vector = line.split(" ");
+							return vector;
+						}
+						count++;
+						
+					}
+					file.close();
+				} catch (FileNotFoundException e) {
+					JOptionPane.showMessageDialog(null, "Path Not Found!");
+				}
+				return null;
 			}
 		});
 
@@ -204,6 +232,17 @@ public class Gui {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String[] params = new String [2];
+				params[0] = "C:\\Program Files\\R\\R-3.4.3\\bin\\x64\\Rscript.exe";
+				params[1] = "experimentBaseDirectory/AntiSpamStudy/R/HV.Boxplot.R";
+				String[] envp = new String [1];
+				envp[0] = "Path=C:\\Program Files\\R\\R-3.4.1\\bin\\x64";
+				try {
+					Process p = Runtime.getRuntime().exec(params, envp, new File("experimentBaseDirectory/AntiSpamStudy/R"));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
 		});

@@ -21,7 +21,6 @@ public class AntiSpamFilterManual {
 		fn = 0;
 		Utils utils = new Utils(rule, spam, ham);
 		rules = utils.getRules();
-		System.out.println(rules.size());
 		emailHam = utils.getEmailHam();
 		emailSpam = utils.getEmailSpam();
 		test();
@@ -52,41 +51,6 @@ public class AntiSpamFilterManual {
 			}
 			if (count > THRESHOLD)
 				fp++;
-		}
-
-	}
-
-	/*metodo que le o ficheiro ham*/
-	protected void readHamFile(String fileName) {
-		Scanner file;
-		try {
-			file = new Scanner(new File(fileName));
-
-			while (file.hasNext()) {
-				String line = file.nextLine();
-				Email email = new Email(line);
-				emailHam.add(email);
-			}
-			file.close();
-		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "Path Not Found!");
-		}
-	}
-
-	/*metodo que le o ficheiro spam*/
-	protected void readSpamFile(String fileName) {
-		Scanner file;
-		try {
-			file = new Scanner(new File(fileName));
-
-			while (file.hasNext()) {
-				String line = file.nextLine();
-				Email email = new Email(line);
-				emailSpam.add(email);
-			}
-			file.close();
-		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "Path Not Found!");
 		}
 
 	}

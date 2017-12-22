@@ -21,8 +21,6 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	private LinkedList<Email> emailHam; /* E mails considerados legitimos */
 	private LinkedList<Email> emailSpam; /* E mails considerados spam */
 	private LinkedList<Rule> rules;
-	private int fp; /* Variavel para guardar os falsos positivos */
-	private int fn;/* Variavel para guardar os falsos negativos */
 
 	public AntiSpamFilterProblem() {
 		this(NUM_OF_RULES);
@@ -50,22 +48,21 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	}
 
 	public void evaluate(DoubleSolution solution) {
-		double[] fx = new double[getNumberOfObjectives()];
-		fp = 0;
-		fn = 0;
+		int fp = 0;
+		int fn = 0;
 		double[] x = new double[getNumberOfVariables()];
 		for (int i = 0; i < solution.getNumberOfVariables(); i++) {
 			x[i] = solution.getVariableValue(i);
 			rules.get(i).setWeight(x[i]);
 		}
 		for (int i = 0; i < emailSpam.size(); i++) {
-			int count = emailSpam.get(i).fpfn(rules);
+			int count = emailSpam.get(i).fpfn(rules,x);
 			if (count < THRESHOLD) {
 				fn++;
 			}
 		}
 		for (int i = 0; i < emailHam.size(); i++) {
-			int count = emailHam.get(i).fpfn(rules);
+			int count = emailHam.get(i).fpfn(rules,x);
 			if (count > THRESHOLD) {
 				fp++;
 			}

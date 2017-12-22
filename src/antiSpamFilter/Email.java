@@ -29,13 +29,12 @@ public class Email {
 		return rulesPerMail;
 	}
 
-	public int fpfn(LinkedList<Rule> rules) {
+	public int fpfn(LinkedList<Rule> rules, double[] x) {
 		int count = 0;
-		
 			for (int i = 0; i < rulesPerMail.size(); i++) {
 				for (int j = 0; j < rules.size(); j++) {
 				if (rules.get(j).getName().equals(rulesPerMail.get(i).getName())) {
-					count += rules.get(j).getWeight();
+					count += x[j];
 				}
 			}
 		}
